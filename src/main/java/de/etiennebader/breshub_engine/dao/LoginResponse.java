@@ -1,5 +1,6 @@
 package de.etiennebader.breshub_engine.dao;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,12 +19,6 @@ public class LoginResponse {
     private int expires_in;
 
     public LoginResponse() {
-    }
-
-    public LoginResponse(String access_token, String token_type, int expires_in) {
-        this.access_token = access_token;
-        this.token_type = token_type;
-        this.expires_in = expires_in;
     }
 
     public String getAccess_token() {

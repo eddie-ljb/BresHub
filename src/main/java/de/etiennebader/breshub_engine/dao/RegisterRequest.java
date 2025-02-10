@@ -5,56 +5,46 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Set;
+
 public class RegisterRequest {
 
     private String username;
-
-    private String password;
-
     private String email;
+    private String password;
+    private Set<String> role;
 
-    private String phone;
-
-    public RegisterRequest() {
-    }
-
-    public RegisterRequest(String username, String password, String email, String phone) {
+    public RegisterRequest(String username, String email, String password, Set<String> role) {
         this.username = username;
-        this.password = password;
         this.email = email;
-        this.phone = phone;
+        this.password = password;
+        this.role = role;
     }
 
-    public @NotNull String getUsername() {
+    public RegisterRequest() {}
+
+    public String getUsername() {
         return username;
     }
-
-    public void setUsername(@NotNull String username) {
-        this.username = username;
+    public void setUsername(String benutzername) {
+        this.username = benutzername;
     }
-
-    public @NotNull String getPassword() {
-        return password;
-    }
-
-    public void setPassword(@NotNull String password) {
-        this.password = password;
-    }
-
-    public @NotNull String getEmail() {
+    public String getEmail() {
         return email;
     }
-
-    public void setEmail(@NotNull String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-
-    @Nullable
-    public String getPhone() {
-        return phone;
+    public String getPassword() {
+        return password;
     }
-
-    public void setPhone(@Nullable String phone) {
-        this.phone = phone;
+    public void setPassword(String passwort) {
+        this.password = passwort;
+    }
+    public Set<String> getRole() {
+        return role;
+    }
+    public void setRole(Set<String> role) {
+        this.role = role;
     }
 }
