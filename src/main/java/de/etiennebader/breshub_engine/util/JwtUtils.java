@@ -1,10 +1,14 @@
 package de.etiennebader.breshub_engine.util;
 
+import de.etiennebader.breshub_engine.filter.AuthorizationFilter;
 import de.etiennebader.breshub_engine.model.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -40,18 +44,20 @@ public class JwtUtils {
     }
 
     public boolean validateJwtToken(String authToken) {
+        System.out.println(authToken);
         try {
             Jwts.parserBuilder()
                     .setSigningKey(getSigningKey())
                     .build()
                     .parseClaimsJws(authToken);
+
             return true;
         } catch (Exception e) {
         }
         return false;
     }
 
-    private SecretKey getSigningKey() {
+    public SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
    }
 }
