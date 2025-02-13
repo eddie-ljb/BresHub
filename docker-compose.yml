@@ -1,0 +1,10 @@
+services:
+  breshub-engine:
+    build:
+      context: .  # Verzeichnis, in dem sich dein Dockerfile befindet
+      dockerfile: Dockerfile  # Der Name des Dockerfiles
+    ports:
+      - "8084:8084"  # Host-Port:Container-Port
+    environment:
+      SERVER_PORT: 8084
+      SPRING_APPLICATION_NAME: "breshub-engine"
