@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.etiennebader.breshub_engine.BreshubEngineApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-02-10T21:17:13" hostname="EDDIES-PC" time="0.467">
+  <properties/>
+  <testcase name="contextLoads()" classname="de.etiennebader.breshub_engine.BreshubEngineApplicationTests" time="0.467"/>
+  <system-out><![CDATA[22:17:04.760 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [de.etiennebader.breshub_engine.BreshubEngineApplicationTests]: BreshubEngineApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:17:04.900 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration de.etiennebader.breshub_engine.BreshubEngineApplication for test class de.etiennebader.breshub_engine.BreshubEngineApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.2)
+
+2025-02-10T22:17:05.384+01:00  INFO 19124 --- [breshub-engine] [    Test worker] d.e.b.BreshubEngineApplicationTests      : Starting BreshubEngineApplicationTests using Java 21.0.4 with PID 19124 (started by bader in D:\java workspaces\BresHub)
+2025-02-10T22:17:05.386+01:00  INFO 19124 --- [breshub-engine] [    Test worker] d.e.b.BreshubEngineApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2025-02-10T22:17:06.100+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-02-10T22:17:06.100+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-10T22:17:06.161+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 2 JPA repository interfaces.
+2025-02-10T22:17:06.481+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-02-10T22:17:06.481+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-02-10T22:17:06.503+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface de.etiennebader.breshub_engine.repositories.RoleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-02-10T22:17:06.504+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface de.etiennebader.breshub_engine.repositories.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-02-10T22:17:06.504+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 0 JDBC repository interfaces.
+2025-02-10T22:17:06.982+01:00  WARN 19124 --- [breshub-engine] [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-02-10T22:17:07.031+01:00  INFO 19124 --- [breshub-engine] [    Test worker] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-02-10T22:17:07.871+01:00  INFO 19124 --- [breshub-engine] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-10T22:17:07.955+01:00  INFO 19124 --- [breshub-engine] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-02-10T22:17:08.007+01:00  INFO 19124 --- [breshub-engine] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-02-10T22:17:08.389+01:00  INFO 19124 --- [breshub-engine] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-10T22:17:08.576+01:00  WARN 19124 --- [breshub-engine] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-10T22:17:08.632+01:00  INFO 19124 --- [breshub-engine] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'org.springframework.jdbc.datasource.DriverManagerDataSource@19105a87']
+	Database driver: undefined/unknown
+	Database version: 15.10
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-02-10T22:17:09.502+01:00  INFO 19124 --- [breshub-engine] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-10T22:17:09.507+01:00  INFO 19124 --- [breshub-engine] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-10T22:17:09.821+01:00  INFO 19124 --- [breshub-engine] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-02-10T22:17:10.928+01:00  WARN 19124 --- [breshub-engine] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-10T22:17:11.009+01:00  INFO 19124 --- [breshub-engine] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2025-02-10T22:17:11.919+01:00  INFO 19124 --- [breshub-engine] [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-10T22:17:13.116+01:00  INFO 19124 --- [breshub-engine] [    Test worker] d.e.b.BreshubEngineApplicationTests      : Started BreshubEngineApplicationTests in 8.018 seconds (process running for 9.5)
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\bader\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.15.11\a38b16385e867f59a641330f0362ebe742788ed8\byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
