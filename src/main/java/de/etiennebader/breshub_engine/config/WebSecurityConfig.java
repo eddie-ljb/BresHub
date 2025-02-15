@@ -72,7 +72,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .addFilterBefore(new AuthorizationFilter(jwtUtils, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return httpSecurity.build();
     }
 
