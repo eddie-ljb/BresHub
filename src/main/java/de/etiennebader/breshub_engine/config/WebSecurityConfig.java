@@ -31,7 +31,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Allow CORS on all paths
-                .allowedOrigins("https://breshub-engine.etiennebader.de") // Allow specific origin
+                .allowedOrigins("https://breshub-engine.etiennebader.de")
+                .allowedOrigins("http://breshub-engine.etiennebader.de")// Allow specific origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow specific methods
                 .allowedHeaders("*") // Allow all headers
                 .allowCredentials(true); // Allow credentials (e.g., cookies)
