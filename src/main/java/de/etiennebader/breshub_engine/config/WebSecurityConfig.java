@@ -20,11 +20,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig {
+public class WebSecurityConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // Allow CORS on all paths
+                .allowedOrigins("https://breshub-engine.etiennebader.de") // Allow specific origin
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow specific methods
+                .allowedHeaders("*") // Allow all headers
+                .allowCredentials(true); // Allow credentials (e.g., cookies)
+    }
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -54,13 +65,12 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, HttpSecurity httpSecurity) throws Exception {
         httpSecurity //
                 .csrf(AbstractHttpConfigurer::disable) //
-                .cors(AbstractHttpConfigurer::disable) //
+                .cors(AbstractHttpConfigurer::disable)//
                 .httpBasic(Customizer.withDefaults()) //
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()) //
                 .addFilterBefore(new AuthorizationFilter(jwtUtils, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
-                .cors().and().csrf().disable();
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }
