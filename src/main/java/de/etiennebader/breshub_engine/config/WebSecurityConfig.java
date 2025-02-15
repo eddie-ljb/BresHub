@@ -59,7 +59,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()) //
                 .addFilterBefore(new AuthorizationFilter(jwtUtils, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .cors().and().csrf().disable();
 
         return httpSecurity.build();
     }
