@@ -31,7 +31,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Allow CORS on all paths
-                .allowedOrigins("https://breshub-engine.etiennebader.de", "http://breshub-engine.etiennebader.de")
+                .allowedOrigins("https://breshub-engine.etiennebader.de", "http://breshub-engine.etiennebader.de", "http://88.151.194.71:8084/")
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow specific methods
                 .allowedHeaders("*") // Allow all headers
                 .allowCredentials(true); // Allow credentials (e.g., cookies)
@@ -65,7 +65,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, HttpSecurity httpSecurity) throws Exception {
         httpSecurity //
                 .csrf(AbstractHttpConfigurer::disable) //
-                .cors(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults()) //
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()) //
                 .addFilterBefore(new AuthorizationFilter(jwtUtils, userDetailsService), UsernamePasswordAuthenticationFilter.class);

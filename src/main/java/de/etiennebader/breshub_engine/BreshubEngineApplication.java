@@ -20,19 +20,5 @@ public class BreshubEngineApplication {
 		app.setDefaultProperties(Collections.singletonMap("server.port", "8084"));
 		app.run(args);
 	}
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**") // Allow CORS on all paths
-						.allowedOrigins("https://breshub-engine.etiennebader.de")
-						.allowedOrigins("http://breshub-engine.etiennebader.de")// Allow specific origin
-						.allowedMethods("GET", "POST", "PUT", "DELETE") // Allow specific methods
-						.allowedHeaders("*") // Allow all headers
-						.allowCredentials(true);
-			}
-		};
-	}
 
 }
