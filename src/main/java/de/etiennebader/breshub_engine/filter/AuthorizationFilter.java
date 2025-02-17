@@ -38,7 +38,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (request.getRequestURI().startsWith("/auth") || request.getRequestURI().startsWith("/swagger-ui") || request.getRequestURI().startsWith("/v3")) {
+        if (request.getRequestURI().startsWith("/auth") || request.getRequestURI().startsWith("/swagger-ui") || request.getRequestURI().startsWith("/v3") || request.getRequestURI().startsWith("/")) {
             filterChain.doFilter(request, response);
             return;
         }
