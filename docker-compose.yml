@@ -8,3 +8,6 @@ services:
     environment:
       SERVER_PORT: 8084
       SPRING_APPLICATION_NAME: "breshub-engine"
+    image: breshub-engine:latest
+    restart: always
+    container_name: breshub-engine
