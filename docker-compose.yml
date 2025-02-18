@@ -6,9 +6,9 @@ services:
     ports:
       - "8084:8084"  # Host-Port:Container-Port
     environment:
-      SERVER_PORT: 8084
-      SPRING_APPLICATION_NAME: "breshub-engine"
-      DATABASE_PASSWORD:  "AVNS_ZowLrPEs2We4NQLgXXi"
+      - SERVER_PORT=8084
+      - SPRING_APPLICATION_NAME=breshub-engine
+      - DATABASE_PASSWORD=AVNS_ZowLrPEs2We4NQLgXXi
     image: breshub-engine:latest
     restart: always
     container_name: breshub-engine
