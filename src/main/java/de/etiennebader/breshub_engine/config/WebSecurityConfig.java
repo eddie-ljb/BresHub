@@ -66,7 +66,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, HttpSecurity httpSecurity) throws Exception {
         System.out.println("Beginn Filterchain");
         httpSecurity //
-                .cors().and()
                 .csrf(AbstractHttpConfigurer::disable) //
                 .httpBasic(Customizer.withDefaults()) //
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()) //
