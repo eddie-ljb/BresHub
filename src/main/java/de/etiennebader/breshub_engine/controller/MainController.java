@@ -13,13 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
     @GetMapping(path = "/")
-    public ModelAndView mainEndpoint(ModelMap model) {
-        return new ModelAndView("redirect:/swagger-ui/index.html", model);
+    public String mainEndpoint() {
+        return "redirect:/swagger-ui/index.html";
     }
 
     @GetMapping(path = "/swagger")
-    public ModelAndView swaggerEndpoint(ModelMap model) {
-        return new ModelAndView("redirect:/swagger-ui/index.html", model);
+    public String swaggerEndpoint() {
+        return "redirect:/swagger-ui/index.html";
     }
 
 }
