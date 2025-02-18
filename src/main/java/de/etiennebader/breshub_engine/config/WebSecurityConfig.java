@@ -21,10 +21,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
+@EnableWebMvc
 public class WebSecurityConfig implements WebMvcConfigurer {
 
     @Override
@@ -64,6 +66,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, HttpSecurity httpSecurity) throws Exception {
         System.out.println("Beginn Filterchain");
         httpSecurity //
+                .cors().and()
                 .csrf(AbstractHttpConfigurer::disable) //
                 .httpBasic(Customizer.withDefaults()) //
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()) //
