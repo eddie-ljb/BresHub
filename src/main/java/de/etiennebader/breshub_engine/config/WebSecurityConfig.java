@@ -32,7 +32,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Allow CORS on all paths
-                .allowedOrigins("https://breshub-engine.etiennebader.de", "http://breshub-engine.etiennebader.de", "http://88.151.194.71:8084/", "http://localhost:4200")
+                .allowedOrigins("https://breshub-engine.etiennebader.de", "http://breshub-engine.etiennebader.de", "http://88.151.194.71:8084/", "http://localhost:4200", "http://breshub.etiennebader.de", "https://breshub.etiennebader.de", "http://88.151.194.71:4201/")
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow specific methods
                 .allowedHeaders("*") // Allow all headers
                 .allowCredentials(true); // Allow credentials (e.g., cookies)
