@@ -1,8 +1,14 @@
 package de.etiennebader.breshub_engine.entities;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeBinderType;
+import org.hibernate.annotations.TypeRegistration;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,6 +24,9 @@ public class User {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
+    @ElementCollection
+    @Column(name = "groups")
+    private List<Long> groups;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -28,6 +37,15 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     // Getters and setters
+
+
+    public List<Long> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Long> groups) {
+        this.groups = groups;
+    }
 
     public Set<Role> getRoles() {
         return roles;
