@@ -62,17 +62,20 @@ public class GroupController {
 
     @PostMapping(value = "/updateGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createGroup(@RequestBody GroupRequest groupRequest) {
-        if (!(groupService.getGroupByName(groupRequest.getName()).getName().isEmpty())) {
-            try {
-                List<String> members = groupRequest.getMembers();
-                for (String member : members) {
-                    userService.addGroupToUser(member, groupRequest.getName());
+        try {
+            if (!(groupService.getGroupByName(groupRequest.getName()).getName().isEmpty())) {
+                try {
+                    List<String> members = groupRequest.getMembers();
+                    for (String member : members) {
+                        userService.addGroupToUser(member, groupRequest.getName());
+                    }
+                    return ResponseEntity.status(HttpStatus.OK).build();
+                } catch (Exception e) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
                 }
-                return ResponseEntity.status(HttpStatus.OK).build();
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
-        }
+        } catch (Exception e) {}
+
         try {
             Group group = new Group();
             group.setName(groupRequest.getName());
