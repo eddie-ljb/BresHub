@@ -72,7 +72,7 @@ public class UserService {
         List<String> members = new ArrayList<>();
         List<User> users = userRepository.findAll();
         for (User user : users) {
-            if (user.getGroups().contains(groupname)) {
+            if (user.getGroups().contains(groupService.getGroupByName(groupname).getId())) {
                 members.add(user.getUsername());
             }
         }
