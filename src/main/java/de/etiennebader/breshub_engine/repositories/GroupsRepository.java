@@ -23,4 +23,7 @@ public interface GroupsRepository extends JpaRepository<Group, Long> {
 
     @Query("SELECT group FROM Group group WHERE group.id = :id")
     Optional<Group> findByID(@Param("id") Long id);
+
+    @Query("SELECT CASE WHEN COUNT(u) > 0 THEN TRUE ELSE FALSE END FROM Group g WHERE g.name = :name")
+    Boolean existsByUsername(@Param("name") String name);
 }

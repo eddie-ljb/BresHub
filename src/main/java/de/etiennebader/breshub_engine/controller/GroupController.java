@@ -2,18 +2,24 @@ package de.etiennebader.breshub_engine.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.etiennebader.breshub_engine.dao.GroupRequest;
+import de.etiennebader.breshub_engine.entities.Group;
 import de.etiennebader.breshub_engine.repositories.RoleRepository;
 import de.etiennebader.breshub_engine.repositories.UserRepository;
 import de.etiennebader.breshub_engine.service.GroupService;
+import de.etiennebader.breshub_engine.service.UserService;
 import de.etiennebader.breshub_engine.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/groups")
@@ -41,9 +47,72 @@ public class GroupController {
     private UserDetailsService userDetailsService;
 
     private ObjectMapper mapper = new ObjectMapper();
+    @Autowired
+    private UserService userService;
 
     @GetMapping(path = "/getAllGroups", produces = "application/json")
     public String getAllGroupsSaved() throws JsonProcessingException {
         return mapper.writeValueAsString(groupService.getAllGroups());
     }
+
+    @GetMapping(path = "/getGroupByName", produces = "application/json")
+    public String getGroupByName(@RequestBody String groupName) throws JsonProcessingException {
+        return mapper.writeValueAsString(groupService.getGroupByName(groupName));
+    }
+
+    @PostMapping(value = "/updateGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity createGroup(@RequestBody GroupRequest groupRequest) {
+        if (!(groupService.getGroupByName(groupRequest.getName()).getName().isEmpty())) {
+            try {
+                List<String> members = groupRequest.getMembers();
+                for (String member : members) {
+                    userService.addGroupToUser(member, groupRequest.getName());
+                }
+                return ResponseEntity.status(HttpStatus.OK).build();
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        }
+        try {
+            Group group = new Group();
+            group.setName(groupRequest.getName());
+            groupService.saveGroup(group);
+            List<String> members = groupRequest.getMembers();
+            for (String member : members) {
+                userService.addGroupToUser(member, group.getName());
+            }
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping(value = "/deleteGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity createGroup(@RequestBody String groupName) throws JsonProcessingException {
+        try {
+            groupService.deleteGroup(groupName);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping(value = "/removeGroupMember", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity removeMemberFromGroup(@RequestBody GroupRequest removeGroupMemberRequest) throws JsonProcessingException {
+        try {
+            for (String member : removeGroupMemberRequest.getMembers()) {
+                userService.deleteGroupFromUser(member, removeGroupMemberRequest.getName());
+            }
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping(path = "/getAllMembersInGroup", produces = "application/json")
+    public String getAllMembersInGroup(@RequestBody String groupName) throws JsonProcessingException {
+        List<String> members = new ArrayList<>();
+        return mapper.writeValueAsString(userService.getMembersFromGroupByGroupname(groupName));
+    }
+
 }

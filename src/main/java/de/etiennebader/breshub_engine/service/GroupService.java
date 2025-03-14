@@ -30,4 +30,36 @@ public class GroupService {
     public List<Group> getAllGroups() {
         return groupsRepository.findAllGroups();
     }
+
+    public Group getGroupByName(String groupName) {
+        if (groupsRepository.findByName(groupName).isPresent()) {
+            return groupsRepository.findByName(groupName).get();
+        }
+        return null;
+    }
+
+    public Group getGroupById(Long id) {
+        if (groupsRepository.findByID(id).isPresent()) {
+            return groupsRepository.findByID(id).get();
+        }
+        return null;
+    }
+
+    public boolean saveGroup(Group group) {
+        if (!(groupsRepository.existsByUsername(group.getName()))) {
+            groupsRepository.save(group);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteGroup(String groupName) {
+        try {
+            Long id = groupsRepository.findByName(groupName).get().getId();
+            groupsRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
