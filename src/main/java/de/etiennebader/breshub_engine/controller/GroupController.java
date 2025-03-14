@@ -56,7 +56,7 @@ public class GroupController {
     }
 
     @GetMapping(path = "/getGroupByName", produces = "application/json")
-    public String getGroupByName(@RequestBody String groupName) throws JsonProcessingException {
+    public String getGroupByName(@RequestParam String groupName) throws JsonProcessingException {
         return mapper.writeValueAsString(groupService.getGroupByName(groupName));
     }
 
@@ -110,7 +110,7 @@ public class GroupController {
     }
 
     @GetMapping(path = "/getAllMembersInGroup", produces = "application/json")
-    public String getAllMembersInGroup(@RequestBody String groupName) throws JsonProcessingException {
+    public String getAllMembersInGroup(@RequestParam String groupName) throws JsonProcessingException {
         List<String> members = new ArrayList<>();
         return mapper.writeValueAsString(userService.getMembersFromGroupByGroupname(groupName));
     }
