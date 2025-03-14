@@ -71,8 +71,9 @@ public class UserService {
     public List<String> getMembersFromGroupByGroupname(String groupname) {
         List<String> members = new ArrayList<>();
         List<User> users = userRepository.findAll();
+        Group group = groupService.getGroupByName(groupname);
         for (User user : users) {
-            if (user.getGroups().contains(groupService.getGroupByName(groupname).getId())) {
+            if (user.getGroups().toString().contains(group.getId().toString())) {
                 members.add(user.getUsername());
             }
         }
