@@ -1,6 +1,5 @@
 package de.etiennebader.breshub_engine.entities;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeBinderType;
