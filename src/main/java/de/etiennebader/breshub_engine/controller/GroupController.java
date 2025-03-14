@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.etiennebader.breshub_engine.repositories.RoleRepository;
 import de.etiennebader.breshub_engine.repositories.UserRepository;
+import de.etiennebader.breshub_engine.service.GroupService;
 import de.etiennebader.breshub_engine.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,7 +29,7 @@ public class GroupController {
     RoleRepository roleRepository;
 
     @Autowired
-    GroupController groupController;
+    GroupService groupService;
 
     @Autowired
     PasswordEncoder encoder;
@@ -43,6 +44,6 @@ public class GroupController {
 
     @GetMapping(path = "/getAllGroups", produces = "application/json")
     public String getAllGroupsSaved() throws JsonProcessingException {
-        return mapper.writeValueAsString(groupController.getAllGroupsSaved());
+        return mapper.writeValueAsString(groupService.getAllGroups());
     }
 }
