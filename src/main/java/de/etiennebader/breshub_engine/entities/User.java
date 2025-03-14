@@ -24,9 +24,8 @@ public class User {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
-    @ElementCollection
     @Column(name = "groups")
-    private List<Long> groups;
+    private String groups;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -40,11 +39,21 @@ public class User {
 
 
     public List<Long> getGroups() {
-        return groups;
+        List<Long> group_ids = new ArrayList<>();
+        char[] group_char = this.groups.toCharArray();
+        for (int i = 0; i < group_char.length; i++) {
+            group_ids.add(Long.parseLong(String.valueOf(group_char[i])));
+            i++;
+        }
+        return group_ids;
     }
 
-    public void setGroups(List<Long> groups) {
-        this.groups = groups;
+    public void setGroups(List<Long> group_ids) {
+        String group = "";
+        for (Long group_id : group_ids) {
+            group += group_id + ",";
+        }
+        this.groups = group;
     }
 
     public Set<Role> getRoles() {
