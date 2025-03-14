@@ -8,17 +8,17 @@ import de.etiennebader.breshub_engine.model.UserDetailsImpl;
 import de.etiennebader.breshub_engine.repositories.RoleRepository;
 import de.etiennebader.breshub_engine.repositories.UserRepository;
 import de.etiennebader.breshub_engine.service.UserDetailsServiceImpl;
+import de.etiennebader.breshub_engine.service.UserService;
 import de.etiennebader.breshub_engine.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -44,6 +44,8 @@ public class CredentialsController {
     private UserDetailsService userDetailsService;
 
     private ObjectMapper mapper = new ObjectMapper();
+    @Autowired
+    private UserService userService;
 
     @GetMapping(path = "/getUsername", produces = "application/json")
     public String getUsernameFromJwtToken(@RequestHeader("Authorization") String authorization) throws JsonProcessingException {
@@ -68,5 +70,10 @@ public class CredentialsController {
             return mapper.writeValueAsString(user.get());
         }
         return  "";
+    }
+
+    @GetMapping(path = "/getUserByUsername", produces = "application/json")
+    public String getAllMembersInGroup(@RequestParam String username) throws JsonProcessingException {
+        return mapper.writeValueAsString(userService.getUserFromUsername(username));
     }
 }

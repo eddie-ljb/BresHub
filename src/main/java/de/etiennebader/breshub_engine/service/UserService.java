@@ -81,4 +81,8 @@ public class UserService {
         }
         return members;
     }
+
+    public User getUserFromUsername(String username) {
+        return userRepository.findByUsername(username).get();
+    }
 }
