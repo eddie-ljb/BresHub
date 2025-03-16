@@ -85,4 +85,16 @@ public class UserService {
     public User getUserFromUsername(String username) {
         return userRepository.findByUsername(username).get();
     }
+
+    public List<Group> getGroupsFromUser(String username) {
+        List<Group> groups = new ArrayList<>();
+        groups = groupService.getAllGroups();
+        List<Group> groupsOfUser = new ArrayList<>();
+        for (Group group : groups) {
+            if (this.getMembersFromGroupByGroupname(group.getName()).contains(username)) {
+                groupsOfUser.add(group);
+            }
+        }
+        return groupsOfUser;
+    }
 }

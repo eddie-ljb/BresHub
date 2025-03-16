@@ -118,4 +118,9 @@ public class GroupController {
         return mapper.writeValueAsString(userService.getMembersFromGroupByGroupname(groupName));
     }
 
+    @GetMapping(path = "/getAllMembersInGroup", produces = "application/json")
+    public String getAllGroupsOfUser(@RequestParam String username) throws JsonProcessingException {
+        return mapper.writeValueAsString(userService.getGroupsFromUser(username));
+    }
+
 }
