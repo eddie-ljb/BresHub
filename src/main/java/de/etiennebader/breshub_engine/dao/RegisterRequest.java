@@ -2,9 +2,12 @@ package de.etiennebader.breshub_engine.dao;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.etiennebader.breshub_engine.entities.ERole;
+import de.etiennebader.breshub_engine.service.RoleService;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class RegisterRequest {
@@ -14,11 +17,11 @@ public class RegisterRequest {
     private String password;
     private Set<String> role;
 
-    public RegisterRequest(String username, String email, String password, Set<String> role) {
+    public RegisterRequest(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = new HashSet<>();
     }
 
     public RegisterRequest() {}
