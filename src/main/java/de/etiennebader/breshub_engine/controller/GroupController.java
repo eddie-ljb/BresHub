@@ -19,7 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/groups")
@@ -119,8 +121,17 @@ public class GroupController {
     }
 
     @GetMapping(path = "/getGroupsOfUser", produces = "application/json")
-    public String getAllGroupsOfUser(@RequestParam String username) throws JsonProcessingException {
-        return mapper.writeValueAsString(userService.getGroupsFromUser(username));
+    public String getAllGroupsInfosOfUser(@RequestParam String username) throws JsonProcessingException {
+        Map<String, Object> response = new HashMap<>();
+        Map<String, List<String>> members = new HashMap();
+        List<Group> groups = userService.getGroupsFromUser(username);
+        for (Group group : groups) {
+            members.put(group.getName(), userService.getMembersFromGroupByGroupname(group.getName()));
+        }
+        response.put("groups", groups);
+        response.put("counter", userService.getGroupsFromUser(username).size());
+        response.put("members", members);
+        return mapper.writeValueAsString(response);
     }
 
     @GetMapping(path = "/getGroupsCounterOfUser", produces = "application/json")
