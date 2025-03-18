@@ -133,6 +133,7 @@ public class GroupController {
         response.put("groups", groups);
         response.put("counter", userService.getGroupsFromUser(username).size());
         response.put("members", members);
+        response.put("membersCount", membersCount);
         return mapper.writeValueAsString(response);
     }
 
