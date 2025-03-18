@@ -124,9 +124,11 @@ public class GroupController {
     public String getAllGroupsInfosOfUser(@RequestParam String username) throws JsonProcessingException {
         Map<String, Object> response = new HashMap<>();
         Map<String, List<String>> members = new HashMap();
+        Map<String, Integer> membersCount = new HashMap<>();
         List<Group> groups = userService.getGroupsFromUser(username);
         for (Group group : groups) {
             members.put(group.getName(), userService.getMembersFromGroupByGroupname(group.getName()));
+            membersCount.put(group.getName(), userService.getMembersFromGroupByGroupname(group.getName()).size());
         }
         response.put("groups", groups);
         response.put("counter", userService.getGroupsFromUser(username).size());
