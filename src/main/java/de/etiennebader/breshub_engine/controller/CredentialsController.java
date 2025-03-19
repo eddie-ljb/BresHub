@@ -76,4 +76,14 @@ public class CredentialsController {
     public String getAllMembersInGroup(@RequestParam String username) throws JsonProcessingException {
         return mapper.writeValueAsString(userService.getUserFromUsername(username));
     }
+
+    @GetMapping(path = "/getAllUser", produces = "application/json")
+    public String getAllUser() throws JsonProcessingException {
+        List<User> users = userRepository.findAll();
+        List<String> usernames = new ArrayList<>();
+        for (User user : users) {
+            usernames.add(user.getUsername());
+        }
+        return mapper.writeValueAsString(usernames);
+    }
 }
